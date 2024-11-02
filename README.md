@@ -21,7 +21,7 @@ To compile the source files, run the following commands:
     ./producer_consumer
 
 ## Example Output
-Here’s an example output using Ubuntu in VirtualBox:
+Here’s an example output on Ubuntu in VirtualBox:
 
     Produced: 83
     Consumed: 83
