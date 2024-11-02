@@ -34,3 +34,5 @@ Here’s an example output using Ubuntu in VirtualBox:
     Consumed: 15
     Produced: 35
 
+    ctrl + c This will stop (terminate) a running program immediately.
+
