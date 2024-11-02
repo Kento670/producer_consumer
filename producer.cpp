@@ -5,7 +5,7 @@
 
 #define BUFFER_SIZE 2
 
-int buffer[BUFFER_SIZE] = {0}; // Shared buffer
+int buffer[BUFFER_SIZE] = {0}; // Shared buffer (table)
 int in = 0; // Index for the next produced item
 int out = 0; // Index for the next consumed item
 
@@ -13,15 +13,15 @@ sem_t empty; // Semaphore to count empty slots
 sem_t full;  // Semaphore to count full slots
 pthread_mutex_t mutex; // Mutex for mutual exclusion
 
-// Function to simulate production of an item
+// Function for producting an item
 void* producer(void* arg) {
     while (true) {
-        int item = rand() % 100; // Produce a random item
+        int item = rand() % 100; // Produce a random item from 0 to 99
         sem_wait(&empty); // Wait for an empty slot
         pthread_mutex_lock(&mutex); // Lock the mutex
 
         buffer[in] = item; // Place item in the buffer
-        std::cout << "Produced: " << item << std::endl;
+        std::cout << "Produced: " << item << std::endl; 
 
         in = (in + 1) % BUFFER_SIZE; // Move to the next index
 
@@ -45,14 +45,9 @@ int main() {
     pthread_create(&prodThread, nullptr, producer, nullptr);
     pthread_create(&consThread, nullptr, consumer, nullptr);
 
-    // Join threads (this will block forever in this example)
+    // Join threads 
     pthread_join(prodThread, nullptr);
     pthread_join(consThread, nullptr);
-
-    // Cleanup (not reachable in this infinite loop)
-    sem_destroy(&empty);
-    sem_destroy(&full);
-    pthread_mutex_destroy(&mutex);
 
     return 0;
 }
