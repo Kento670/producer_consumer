@@ -12,7 +12,7 @@ extern sem_t empty; // Semaphore to count empty slots
 extern sem_t full;  // Semaphore to count full slots
 extern pthread_mutex_t mutex; // Mutex for mutual exclusion
 
-// Function to simulate consumption of an item
+// Function for consumpting an item
 void* consumer(void* arg) {
     while (true) {
         sem_wait(&full); // Wait for a full slot
